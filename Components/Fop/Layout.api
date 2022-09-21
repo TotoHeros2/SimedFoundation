@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wodefinitions>
+	<wo class="Layout" wocomponentcontent="true">
+
+		<binding name="landscape" defaults="Boolean"/>
+		<binding name="useRegionStart" defaults="Boolean"/>
+		<binding name="marginTop"/>
+		<binding name="marginLeft"/>
+		<binding name="marginBottom"/>
+		<binding name="marginRight"/>
+
+		<validation message="&apos;landscape&apos; is a required binding">
+			<unbound name="landscape"/>
+		</validation>
+	</wo>
+</wodefinitions>

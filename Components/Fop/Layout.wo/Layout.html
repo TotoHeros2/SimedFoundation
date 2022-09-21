@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+	<!-- defines the layout master -->
+	<fo:layout-master-set>
+		<!-- format normal -->
+		<WEBOBJECT NAME=Conditional1>
+			<WEBOBJECT NAME=Conditional4><fo:simple-page-master master-name="first" margin-top="0.5cm" margin-bottom="0.0cm" margin-left="<WEBOBJECT NAME=String3></WEBOBJECT>" margin-right="<WEBOBJECT NAME=String4></WEBOBJECT>" page-width="21cm" page-height="29.7cm">
+					<fo:region-before region-name="xsl-region-before" extent="<WEBOBJECT NAME=String1></WEBOBJECT>" />
+					<fo:region-after region-name="xsl-region-after" extent="<WEBOBJECT NAME=String2></WEBOBJECT>" />
+					<fo:region-body region-name="xsl-region-body" margin-bottom="<WEBOBJECT NAME=String2></WEBOBJECT>" margin-top="<WEBOBJECT NAME=String1></WEBOBJECT>" margin-right="0cm" margin-left="0cm" />
+				</fo:simple-page-master>
+			</WEBOBJECT>
+			<WEBOBJECT NAME=Conditional3>
+				<fo:simple-page-master master-name="first" margin-top="0.5cm" margin-bottom="0.0cm" margin-left="0.5cm" margin-right="<WEBOBJECT NAME=String4></WEBOBJECT>" page-width="21cm" page-height="29.7cm">
+					<fo:region-before region-name="xsl-region-before" extent="<WEBOBJECT NAME=String1></WEBOBJECT>" />
+					<fo:region-after region-name="xsl-region-after" extent="<WEBOBJECT NAME=String2></WEBOBJECT>" />
+					<fo:region-body region-name="xsl-region-body" margin-bottom="<WEBOBJECT NAME=String2></WEBOBJECT>" margin-top="<WEBOBJECT NAME=String1></WEBOBJECT>" margin-right="0cm" margin-left="5cm" />
+					<!--  <fo:region-start region-name="xsl-region-start" extent="1.8cm" display-align="after" background-color="#8888FF" background-image="url('Images/upperside.gif')" background-repeat="repeat-y" background-position="center center" precedence="false" padding="6pt" border-right="#0000CC 3pt solid" reference-orientation="90" /> -->
+					<fo:region-start region-name="xsl-region-start" extent="4.8cm" />
+				</fo:simple-page-master></WEBOBJECT>
+			<fo:simple-page-master master-name="rest" margin-top="0.5cm" margin-bottom="0.0cm" margin-left="<WEBOBJECT NAME=String3></WEBOBJECT>" margin-right="<WEBOBJECT NAME=String4></WEBOBJECT>" page-width="21cm" page-height="29.7cm">
+				<fo:region-body region-name="xsl-region-body" margin-bottom="<WEBOBJECT NAME=String2></WEBOBJECT>" margin-top="<WEBOBJECT NAME=String1></WEBOBJECT>" margin-right="0cm" margin-left="0cm" />
+				<fo:region-before region-name="xsl-region-before-second" extent="<WEBOBJECT NAME=String1></WEBOBJECT>" />
+				<fo:region-after region-name="xsl-region-after" extent="<WEBOBJECT NAME=String2></WEBOBJECT>" />
+			</fo:simple-page-master>
+		</WEBOBJECT>
+		<!-- format paysage -->
+		<WEBOBJECT NAME=Conditional2>
+			<fo:simple-page-master master-name="first" margin-top="0.5cm" margin-bottom="0.0cm" margin-left="<WEBOBJECT NAME=String3></WEBOBJECT>" margin-right="<WEBOBJECT NAME=String4></WEBOBJECT>" page-width="29.7cm" page-height="21cm">
+				<fo:region-body region-name="xsl-region-body" margin-bottom="<WEBOBJECT NAME=String2></WEBOBJECT>" margin-top="<WEBOBJECT NAME=String1></WEBOBJECT>" margin-right="0cm" margin-left="0cm" />
+				<fo:region-before region-name="xsl-region-before" extent="<WEBOBJECT NAME=String1></WEBOBJECT>" />
+				<fo:region-after region-name="xsl-region-after" extent="<WEBOBJECT NAME=String2></WEBOBJECT>" />
+			</fo:simple-page-master>
+			<fo:simple-page-master master-name="rest" margin-top="0.5cm" margin-bottom="0.0cm" margin-left="<WEBOBJECT NAME=String3></WEBOBJECT>" margin-right="<WEBOBJECT NAME=String4></WEBOBJECT>" page-width="29.7cm" page-height="21cm">
+				<fo:region-body region-name="xsl-region-body" margin-bottom="<WEBOBJECT NAME=String2></WEBOBJECT>" margin-top="<WEBOBJECT NAME=String1></WEBOBJECT>" margin-right="0cm" margin-left="0cm" />
+				<fo:region-before region-name="xsl-region-before-second" extent="<WEBOBJECT NAME=String1></WEBOBJECT>" />
+				<fo:region-after region-name="xsl-region-after" extent="<WEBOBJECT NAME=String2></WEBOBJECT>" />
+			</fo:simple-page-master>
+		</WEBOBJECT>
+		<!-- definition des sequences -->
+		<fo:page-sequence-master master-name="sequence" master-reference="sequence">
+			<fo:repeatable-page-master-alternatives>
+				<fo:conditional-page-master-reference master-name="first" master-reference="first" page-position="first" />
+				<fo:conditional-page-master-reference master-name="rest" master-reference="rest" page-position="rest" />
+				<!-- recommended fallback procedure -->
+				<fo:conditional-page-master-reference master-name="rest" master-reference="rest" />
+			</fo:repeatable-page-master-alternatives>
+		</fo:page-sequence-master>
+	</fo:layout-master-set>
+	<fo:page-sequence master-name="sequence" master-reference="sequence" initial-page-number="1">
+		<WEBOBJECT NAME=ComponentContent1></WEBOBJECT>
+	</fo:page-sequence>
+</fo:root>

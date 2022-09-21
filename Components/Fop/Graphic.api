@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wodefinitions>
+	<wo class="Graphic" wocomponentcontent="false">
+
+		<binding name="graphicName" defaults="Resources"/>
+		<binding name="framework" defaults="Frameworks"/>
+		<binding name="height"/>
+		<binding name="data"/>
+		<binding name="href"/>
+		<binding name="width"/>
+
+		<validation message="&apos;graphicName&apos; is a required binding">
+			<unbound name="graphicName"/>
+		</validation>
+
+		<validation message="&apos;framework&apos; is a required binding">
+			<unbound name="framework"/>
+		</validation>
+	</wo>
+</wodefinitions>

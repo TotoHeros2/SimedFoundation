@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wodefinitions>
+	<wo class="Header" wocomponentcontent="true">
+
+		<binding name="first" defaults="Boolean"/>
+		<binding name="second" defaults="Boolean"/>
+		<binding name="landscape"/>
+	</wo>
+</wodefinitions>

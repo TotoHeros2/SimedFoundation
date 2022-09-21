@@ -1,0 +1,7 @@
+//utilityMethod to add style for highliting error
+#foreach ($attribute in $entity.sortedClassAttributes)
+	public String ${attribute.name}ErrorStyle() {
+		return #if($entity.userInfo.errorIdentifier)"${entity.userInfo.errorIdentifier}_${attribute.name}_" + this.${entity.userInfo.errorField}() + "_error ${entity.userInfo.errorIdentifier}_${attribute.name}_" + this.${entity.userInfo.errorField}() + "_warn" #else"${attribute.name}_error ${attribute.name}_warn"#end;
+	}
+
+#end

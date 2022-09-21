@@ -1,0 +1,16 @@
+  public void cleanup() {
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if($attribute.userInfo.validator)
+#foreach($validator in $attribute.userInfo.validator)
+#if($validator.type == "OtherValidator")
+#foreach($constraint in $validator.constraint)
+  //$attribute.name has othervalidator
+  if (!${attribute.javaClassName}.othersList().contains(this.${attribute.name}())) {
+    this.takeStoredValueForKey(null, "${constraint.value}");
+  }
+#end
+#end
+#end
+#end
+#end
+}

@@ -1,0 +1,57 @@
+	public void validateData() {
+		log.warn("start validating attribute for ${entity.name}");
+#foreach ($attribute in $entity.sortedClassAttributes)
+		problems().addObjectsFromArray(${attribute.name}Validate());
+#end
+		log.warn("end validating attribute for ${entity.name}");
+
+	//Relationship Validation
+		log.warn("start validating relationship for ${entity.name}");
+#foreach ($relationship in $entity.sortedClassRelationships)
+#if (!$relationship.inherited)
+#if($relationship.userInfo.deferValidation)
+		NSArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name} = ${relationship.name}();
+		for (${relationship.actualDestination.classNameWithDefault} object : ${relationship.name}) {
+			object.clearProblems();
+			object.validateData();
+			NSArray<ValidationProblem> problems = object.problems().immutableClone();
+			problems().addObjectsFromArray(problems);
+		}	
+#end
+#end
+#end
+		log.warn("end validating relationship for ${entity.name}");
+	}
+	
+
+#foreach ($attribute in $entity.sortedClassAttributes)
+
+	private String ${attribute.name}ErrorKey = #if($entity.userInfo.errorIdentifier)"${entity.userInfo.errorIdentifier}_${attribute.name}_" + this.${entity.userInfo.errorField}()#else"${attribute.name}"#end;
+
+	public ValidationProblemList ${attribute.name}Validate() {
+		ValidationProblemList problems = new ValidationProblemList();
+#if(!$attribute.allowsNull)
+		if(this.${attribute.name}() == null){
+			problems.add(new ValidationProblem(${attribute.name}ErrorKey, "${attribute.name} can't be null", Validator.ErrorLevel("NULL")));
+		}
+#end
+		if(${attribute.name}Validators().count() > 0){
+			HashMap<Object, Object> constraintMap = new HashMap<Object, Object>();
+			AbstractValidator v;
+			//We will treat: 
+			for (Validator p : ${attribute.name}Validators()) {
+			
+				if(${superClassName}.respectDependency(this, p.getDependency())){
+			
+			
+					v = ValidatorFactory.getClass(p.getValidatorName());
+					ValidationProblem pb = v.checkForProblem(this, ${attribute.uppercaseUnderscoreName}_KEY, p, Validator.ErrorLevel(p.getValidatorName()));
+					if(pb != null) {
+						problems.add(pb);
+					}
+				}
+			}
+		}
+		return problems;
+	}
+#end

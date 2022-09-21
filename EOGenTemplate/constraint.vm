@@ -1,0 +1,43 @@
+#foreach ($attribute in $entity.sortedClassAttributes)
+	private static ch.hcuge.simed.foundation.utilities.validator.Validators _${attribute.name}Validators;
+	public static ch.hcuge.simed.foundation.utilities.validator.Validators ${attribute.name}Validators() {
+		if(_${attribute.name}Validators == null) {
+			_${attribute.name}Validators = new ch.hcuge.simed.foundation.utilities.validator.Validators();
+#if($attribute.userInfo.validator)	
+			//Initialisation variable for a validator
+			ch.hcuge.simed.foundation.utilities.validator.Validator validator;
+			HashMap<Object, Object> constraintMap;
+			ArrayList<Object> dependValue;
+			HashMap<String, ArrayList<Object>> dependMap;
+#foreach($validator in $attribute.userInfo.validator)			
+			// Start validator $validator.type
+			validator = new ch.hcuge.simed.foundation.utilities.validator.Validator("$validator.type", "${attribute.name}");
+#if($validator.parameters)
+#if($validator.parameters.constraints) 
+			//Constraint
+#foreach($validatorParam in $validator.parameters.constraints)
+			constraintMap = new HashMap<Object, Object>();
+#foreach($constraint in $validatorParam)
+			constraintMap.put("${constraint.operator}", "${constraint.value}");
+#end
+			validator.addConstraint(constraintMap);
+#end
+#if($validator.parameters.depends)
+			//Dependency
+			dependMap = new HashMap<String, ArrayList<Object>>();
+#foreach($depend in $validator.parameters.depends)
+			dependValue = new ArrayList<Object>();
+#foreach($value in $depend.value)
+			dependValue.add($value);
+#end
+			dependMap.put("${depend.key}", dependValue);
+#end
+			validator.setDependency(dependMap);
+#end#end#end
+			_${attribute.name}Validators.addValidator(validator);
+			
+#end#end
+		}
+		return _${attribute.name}Validators;
+	}
+#end

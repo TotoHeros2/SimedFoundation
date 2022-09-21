@@ -1,0 +1,57 @@
+ComponentContent1: WOComponentContent {
+}
+
+Conditional1: WOConditional {
+	condition = landscape;
+	negate = true;
+}
+
+Conditional2: WOConditional {
+	condition = landscape;
+}
+
+Conditional3: WOConditional {
+	condition = pageNumberString;
+
+}
+
+Conditional4: WOConditional {
+	condition = pageNumberString;
+	negate = true;
+}
+
+Conditional5: WOConditional {
+	condition = isContentBottom;
+}
+
+Conditional6: WOConditional {
+	condition = hidePrintBy;
+	negate = true;
+}
+
+Conditional7: WOConditional {
+	condition = isContentBottom;
+	negate = true;
+}
+
+Conditional8: WOConditional {
+	condition = landscape;
+}
+
+
+String1: WOString {
+	value = length;
+}
+
+String2: WOString {
+	value = demi_length;
+}
+
+String3: WOString {
+	dateformat = format;
+	value = today;
+}
+
+String4: WOString {
+	value = pageNumberString;
+}

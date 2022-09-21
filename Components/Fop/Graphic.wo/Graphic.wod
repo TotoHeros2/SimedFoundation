@@ -1,0 +1,17 @@
+Conditional1: WOConditional {
+	condition = isGraphicNameNull;
+	negate = true;
+}
+
+String1: WOString {
+	value = url;
+}
+
+String2: WOString {
+	value = height;
+}
+
+String3: WOString {
+	value = width;
+}
+

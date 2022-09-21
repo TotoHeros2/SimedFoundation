@@ -1,0 +1,22 @@
+//utilityMethod to know if the red point should be displayed
+//unanswered
+//null value
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if(!$attribute.allowsNull && !$attribute.userInfo.validator)
+	public boolean ${attribute.name}DisplayRedPoint() {
+		if(this.${attribute.name}() == null){
+			return true;
+		}
+		return false;
+	}
+	
+#end
+#if($attribute.userInfo.validator)
+	public boolean ${attribute.name}DisplayRedPoint() {
+		ValidationProblemList pblist = ${attribute.name}Validate();
+		if(pblist.infos().count() >0){
+			return true;
+		}
+		return false;
+	}
+#end#end

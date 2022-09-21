@@ -1,0 +1,36 @@
+ComponentContent1: WOComponentContent {
+}
+
+Conditional1: WOConditional {
+	condition = landscape;
+	negate = true;
+}
+
+Conditional2: WOConditional {
+	condition = landscape;
+}
+
+Conditional3: WOConditional {
+	condition = useRegionStart;
+}
+
+Conditional4: WOConditional {
+	condition = useRegionStart;
+	negate = true;
+}
+
+String1: WOString {
+	value = marginTop;
+}
+
+String2: WOString {
+	value = marginBottom;
+}
+
+String3: WOString {
+	value = marginLeft;
+}
+
+String4: WOString {
+	value = marginRight;
+}

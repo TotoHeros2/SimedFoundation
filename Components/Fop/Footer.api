@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><wodefinitions>
+	<wo class="Footer" wocomponentcontent="true">
+
+		<binding name="user"/>
+		<binding defaults="Boolean" name="landscape"/>
+		<binding name="pageNumberString"/>
+		<binding defaults="Boolean" name="footerContentBottom"/>
+		<binding name="lengthInCM"/>
+		<binding defaults="Boolean" name="displayInitials"/>
+		<binding defaults="Boolean" name="hidePrintBy"/>
+		<binding name="upperLineText"/>
+
+		
+	</wo>
+</wodefinitions>

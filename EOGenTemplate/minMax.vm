@@ -1,0 +1,61 @@
+//utilityMethod to rreturn the min and max value from the rangeValidator if needed
+//unanswered
+//null value
+#foreach ($attribute in $entity.sortedClassAttributes)
+//for attribute: '$attribute.name'
+//attribute.userInfo.validator = #if ($attribute.userInfo.validator)TRUE #end
+//attribute.javaClassName is 'org.joda.time.LocalDate' = <<#if (${attribute.javaClassName} == "org.joda.time.LocalDate") TRUE #end>>
+//coumpound if = #if($attribute.userInfo.validator && $attribute.javaClassName == "org.joda.time.LocalDate") TRUE  #end
+#if($attribute.userInfo.validator && $attribute.javaClassName == "org.joda.time.LocalDate")
+#foreach($validator in $attribute.userInfo.validator)
+//Validator type is '$validator.type'
+#if($validator.type == "RangeValidator")
+	public org.joda.time.LocalDate ${attribute.name}MaxValue() {
+		HashMap<Object, Object> constraintMap;
+		HashMap<String, ArrayList<Object>> dependMap;
+		ArrayList<Object> dependValue;
+		constraintMap = new HashMap<Object, Object>();
+		dependMap = new HashMap<String, ArrayList<Object>>();
+#foreach($constraint in $validator.constraint)
+		constraintMap.put("${constraint.operator}", "${constraint.value}");
+#end
+#foreach($depend in $validator.depends)
+		dependValue = new ArrayList<Object>();
+#foreach($value in $depend.value)
+		dependValue.add($value);
+#end
+		dependMap.put("${depend.key}", dependValue);
+#end
+		if(${superClassName}.respectDependency(this, dependMap)){
+			constraintMap = ${superClassName}.convertHashMap(this, constraintMap, #if($validator.staticConstraint) false #else true #end);
+			return null;
+		}
+		return null;
+	}
+	
+	public org.joda.time.LocalDate ${attribute.name}MinValue() {
+		HashMap<Object, Object> constraintMap;
+		HashMap<String, ArrayList<Object>> dependMap;
+		ArrayList<Object> dependValue;
+		constraintMap = new HashMap<Object, Object>();
+		dependMap = new HashMap<String, ArrayList<Object>>();
+#foreach($constraint in $validator.constraint)
+		constraintMap.put("${constraint.operator}", "${constraint.value}");
+#end
+#foreach($depend in $validator.depends)
+		dependValue = new ArrayList<Object>();
+#foreach($value in $depend.value)
+		dependValue.add($value);
+#end
+		dependMap.put("${depend.key}", dependValue);
+#end
+		if(${superClassName}.respectDependency(this, dependMap)){
+			constraintMap = ${superClassName}.convertHashMap(this, constraintMap, #if($validator.staticConstraint) false #else true #end);
+			return null;
+		}
+		return null;
+	}
+#end
+#end
+#end
+#end
