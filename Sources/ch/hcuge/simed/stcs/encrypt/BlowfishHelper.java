@@ -11,7 +11,7 @@ import com.webobjects.foundation.NSMutableArray;
 import er.extensions.eof.ERXEC;
 
 public class BlowfishHelper {
-	private static String key = "ln$jklDbn102";
+	private static String key = "Put real key here";
 	private static Blowfish bf = new Blowfish(key);
 
 	public static String encrypt(String name)
